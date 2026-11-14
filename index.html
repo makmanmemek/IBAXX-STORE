@@ -10,12 +10,14 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0d1117; color: #f3f4f6; }
         .bg-grid { background-image: radial-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px); background-size: 20px 20px; }
         .glass-card { background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); }
+        /* Memastikan tombol aman dari benturan sentuhan */
+        button, a, input, select { position: relative; z-index: 20; }
     </style>
 </head>
-<body class="bg-grid min-h-screen pb-24">
+<body class="bg-grid min-h-screen pb-32">
 
     <!-- HEADER / NAVBAR ATAS -->
-    <header class="sticky top-0 z-40 bg-[#0d1117]/90 backdrop-blur-md border-b border-blue-900/40 px-4 py-3 flex items-center justify-between">
+    <header class="sticky top-0 z-40 bg-[#0d1117]/95 backdrop-blur-md border-b border-blue-900/40 px-4 py-3 flex items-center justify-between">
         <div class="flex items-center space-x-3">
             <div class="bg-blue-600 text-white font-black px-2.5 py-1 rounded-lg text-xs tracking-wider shadow-lg shadow-blue-600/30">ASTRA</div>
             <h1 class="text-lg font-extrabold tracking-widest text-white">ASTRA</h1>
@@ -24,12 +26,12 @@
             <div class="bg-gray-900 border border-blue-500/30 px-3 py-1 rounded-full flex items-center space-x-1.5 text-xs font-bold text-blue-400">
                 <span>💎</span><span>1</span>
             </div>
-            <button onclick="toggleSound()" id="sound-btn" class="p-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-300 hover:text-white">🔊</button>
-            <button onclick="openCartModal()" class="relative p-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-300 hover:text-white">
+            <button onclick="toggleSound()" id="sound-btn" class="p-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-300">🔊</button>
+            <button onclick="openCartModal()" class="relative p-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-300">
                 🛒
                 <span id="cart-badge" class="absolute -top-1 -right-1 bg-blue-600 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center text-white hidden">0</span>
             </button>
-            <button onclick="openAdminModal()" class="p-2 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-400 hover:bg-blue-600/30">⚙️</button>
+            <button onclick="openAdminModal()" class="p-2 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-400">⚙️</button>
         </div>
     </header>
 
@@ -38,7 +40,6 @@
 
         <!-- TAB 1: BERANDA -->
         <section id="tab-beranda" class="space-y-6">
-            <!-- Kartu Profil Toko -->
             <div class="glass-card rounded-2xl p-4 relative overflow-hidden shadow-xl border-t-2 border-t-blue-500">
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center space-x-2">
@@ -52,63 +53,16 @@
                         <h2 class="text-xl font-black text-white">ASTRA STORE</h2>
                         <p class="text-xs text-gray-400">Stok Ready: <span id="stat-ready" class="text-blue-400 font-bold">1</span> | Terjual: <span id="stat-sold" class="text-gray-300 font-bold">3</span></p>
                     </div>
-                    <button onclick="switchTab('stok')" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg shadow-blue-600/30 hover:brightness-110 transition">
-                        LIHAT SEMUA STOK →
+                    <button onclick="switchTab('stok')" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg shadow-blue-600/30">
+                        LIHAT STOK →
                     </button>
-                </div>
-            </div>
-
-            <!-- List Staff / Admin Karakter -->
-            <div>
-                <h3 class="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-3">Staff / Admin Store</h3>
-                <div class="grid grid-cols-4 gap-2.5">
-                    <div class="glass-card rounded-xl p-2 text-center border border-blue-500/30">
-                        <div class="w-12 h-12 mx-auto bg-blue-900/40 rounded-lg mb-1 flex items-center justify-center text-lg">👦</div>
-                        <div class="text-[11px] font-bold text-white truncate">Daiquiri</div>
-                        <div class="text-[9px] text-blue-400">Sticker Rookie</div>
-                    </div>
-                    <div class="glass-card rounded-xl p-2 text-center border border-blue-500/30">
-                        <div class="w-12 h-12 mx-auto bg-indigo-900/40 rounded-lg mb-1 flex items-center justify-center text-lg">🤖</div>
-                        <div class="text-[11px] font-bold text-white truncate">Inami Rai</div>
-                        <div class="text-[9px] text-blue-400">Mecha Raider</div>
-                    </div>
-                    <div class="glass-card rounded-xl p-2 text-center border border-blue-500/30">
-                        <div class="w-12 h-12 mx-auto bg-blue-900/40 rounded-lg mb-1 flex items-center justify-center text-lg">⚡</div>
-                        <div class="text-[11px] font-bold text-white truncate">Astra</div>
-                        <div class="text-[9px] text-blue-400">Staff Admin</div>
-                    </div>
-                    <div class="glass-card rounded-xl p-2 text-center border border-blue-500/30">
-                        <div class="w-12 h-12 mx-auto bg-green-900/40 rounded-lg mb-1 flex items-center justify-center text-lg">😎</div>
-                        <div class="text-[11px] font-bold text-white truncate">Kai</div>
-                        <div class="text-[9px] text-blue-400">Juragan Muda</div>
-                    </div>
                 </div>
             </div>
 
             <!-- Pusat Info -->
             <div class="space-y-2.5">
                 <h3 class="text-xs font-extrabold text-gray-400 uppercase tracking-widest">Pusat Info</h3>
-                <a href="https://whatsapp.com" target="_blank" class="glass-card rounded-xl p-3.5 flex items-center justify-between hover:border-blue-500/60 transition">
-                    <div class="flex items-center space-x-3">
-                        <span class="text-xl">📢</span>
-                        <div>
-                            <div class="text-sm font-bold text-white">Saluran</div>
-                            <div class="text-xs text-gray-400">Update stok terbaru setiap hari</div>
-                        </div>
-                    </div>
-                    <span class="text-blue-400 font-bold">→</span>
-                </a>
-                <a href="https://whatsapp.com" target="_blank" class="glass-card rounded-xl p-3.5 flex items-center justify-between hover:border-blue-500/60 transition">
-                    <div class="flex items-center space-x-3">
-                        <span class="text-xl">👥</span>
-                        <div>
-                            <div class="text-sm font-bold text-white">Grup WhatsApp</div>
-                            <div class="text-xs text-gray-400">Info stok & promo spesial</div>
-                        </div>
-                    </div>
-                    <span class="text-blue-400 font-bold">→</span>
-                </a>
-                <a href="https://wa.me/6285656021660" target="_blank" class="glass-card rounded-xl p-3.5 flex items-center justify-between hover:border-blue-500/60 transition">
+                <a href="https://wa.me/6285656021660" target="_blank" class="glass-card rounded-xl p-3.5 flex items-center justify-between block">
                     <div class="flex items-center space-x-3">
                         <span class="text-xl">💬</span>
                         <div>
@@ -119,179 +73,159 @@
                     <span class="text-blue-400 font-bold">→</span>
                 </a>
             </div>
-
-            <!-- Cara Beli -->
-            <div class="glass-card rounded-2xl p-4 border border-blue-500/30 space-y-3">
-                <h3 class="text-xs font-extrabold text-blue-400 uppercase tracking-widest flex items-center space-x-2">
-                    <span>🛡️</span><span>Cara Beli Aman Via Admin</span>
-                </h3>
-                <div class="space-y-2.5 text-xs">
-                    <div class="flex items-start space-x-3 bg-gray-900/60 p-2.5 rounded-xl border border-gray-800">
-                        <span class="bg-blue-600 text-white font-bold w-5 h-5 rounded flex items-center justify-center shrink-0">1</span>
-                        <p class="text-gray-300">Pilih akun, buka rincian spesifikasi & foto lengkap di menu Stok.</p>
-                    </div>
-                    <div class="flex items-start space-x-3 bg-gray-900/60 p-2.5 rounded-xl border border-gray-800">
-                        <span class="bg-blue-600 text-white font-bold w-5 h-5 rounded flex items-center justify-center shrink-0">2</span>
-                        <p class="text-gray-300">Chat admin lewat WhatsApp, tanyakan detail atau langsung pesan.</p>
-                    </div>
-                    <div class="flex items-start space-x-3 bg-gray-900/60 p-2.5 rounded-xl border border-gray-800">
-                        <span class="bg-blue-600 text-white font-bold w-5 h-5 rounded flex items-center justify-center shrink-0">3</span>
-                        <p class="text-gray-300">Bayar sesuai arahan admin, data akun langsung dikirim aman.</p>
-                    </div>
-                </div>
-                <a href="https://wa.me/6285656021660" target="_blank" class="block w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs text-center rounded-xl shadow-lg shadow-blue-600/30 transition">
-                    💬 CHAT ADMIN SEKARANG
-                </a>
-            </div>
         </section>
 
-        <!-- TAB 2: STOK / INVENTARIS -->
+        <!-- TAB 2: STOK -->
         <section id="tab-stok" class="space-y-4 hidden">
             <div class="flex items-center justify-between">
                 <h2 class="text-sm font-extrabold uppercase tracking-widest text-white">Inventaris Toko</h2>
                 <span id="stok-count" class="text-xs text-gray-400 font-medium">0 akun</span>
             </div>
-
-            <!-- Pencarian & Filter -->
-            <div class="space-y-2.5">
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-400">🔍</span>
-                    <input type="text" id="search-input" oninput="renderStok()" placeholder="Cari game, kode, atau rank..." class="w-full bg-gray-900 border border-gray-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
-                </div>
-                <!-- Filter Status -->
-                <div class="flex space-x-2 overflow-x-auto pb-1 text-xs font-bold scrollbar-none">
-                    <button onclick="setFilterStatus('all')" id="filter-all" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white shrink-0">SEMUA</button>
-                    <button onclick="setFilterStatus('READY')" id="filter-ready" class="px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-gray-400 shrink-0">READY</button>
-                    <button onclick="setFilterStatus('TERJUAL')" id="filter-sold" class="px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-gray-400 shrink-0">TERJUAL</button>
-                </div>
-                <!-- Filter Game/Kategori -->
-                <div id="category-filters" class="flex space-x-2 overflow-x-auto pb-1 text-xs font-semibold scrollbar-none">
-                    <button onclick="setCategory('ALL')" class="cat-btn px-3 py-1 rounded-lg bg-blue-600 text-white shrink-0">SEMUA GAME</button>
-                    <button onclick="setCategory('JBKU')" class="cat-btn px-3 py-1 rounded-lg bg-gray-900 border border-gray-800 text-gray-400 shrink-0">JBKU</button>
-                    <button onclick="setCategory('MOBILE LEGENDS')" class="cat-btn px-3 py-1 rounded-lg bg-gray-900 border border-gray-800 text-gray-400 shrink-0">MOBILE LEGENDS</button>
-                    <button onclick="setCategory('FREE FIRE')" class="cat-btn px-3 py-1 rounded-lg bg-gray-900 border border-gray-800 text-gray-400 shrink-0">FREE FIRE</button>
-                </div>
+            <div class="relative">
+                <input type="text" id="search-input" oninput="renderStok()" placeholder="Cari game atau kode akun..." class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
             </div>
-
-            <!-- List Item Produk -->
-            <div id="product-list" class="space-y-3">
-                <!-- Render via JS -->
-            </div>
+            <div id="product-list" class="space-y-3"></div>
         </section>
 
         <!-- TAB 3: FAVORIT -->
         <section id="tab-favorit" class="space-y-4 hidden">
             <h2 class="text-sm font-extrabold uppercase tracking-widest text-white">Favorit Tersimpan</h2>
-            <div id="favorit-list" class="space-y-3">
-                <!-- Render via JS -->
-            </div>
+            <div id="favorit-list" class="space-y-3"></div>
         </section>
 
         <!-- TAB 4: INFO -->
         <section id="tab-info" class="space-y-4 hidden">
-            <h2 class="text-sm font-extrabold uppercase tracking-widest text-white">Pengaturan & Toko</h2>
+            <h2 class="text-sm font-extrabold uppercase tracking-widest text-white">Pengaturan Toko</h2>
             <div class="glass-card rounded-2xl p-4 space-y-4 border border-blue-500/30">
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="text-sm font-bold text-white">Suara tombol</div>
-                        <div class="text-xs text-gray-400">Bunyi pendek saat tombol ditekan</div>
-                    </div>
-                    <input type="checkbox" id="sound-toggle" checked class="w-5 h-5 accent-blue-600 rounded">
-                </div>
-                <hr class="border-gray-800">
-                <div class="flex items-center justify-between">
-                    <div>
                         <div class="text-sm font-bold text-white">Favorit tersimpan</div>
-                        <div id="fav-count-text" class="text-xs text-gray-400">0 akun di perangkat ini</div>
+                        <div id="fav-count-text" class="text-xs text-gray-400">0 akun</div>
                     </div>
-                    <button onclick="clearFavorites()" class="px-3 py-1.5 bg-gray-900 border border-gray-800 text-xs font-bold text-red-400 hover:bg-red-500/10 rounded-xl transition">KOSONGKAN</button>
+                    <button onclick="clearFavorites()" class="px-3 py-1.5 bg-red-500/20 text-red-400 text-xs font-bold rounded-xl">KOSONGKAN</button>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- BOTTOM NAVBAR / NAVIGASI BAWAH -->
-    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-[#0d1117]/95 backdrop-blur-xl border-t border-blue-900/40 px-2 py-2 flex justify-around items-center z-40">
-        <button onclick="switchTab('beranda')" id="nav-beranda" class="flex flex-col items-center space-y-1 text-blue-500 w-1/5">
+    <!-- BOTTOM NAVBAR / NAVIGASI BAWAH (Z-INDEX TINGGI AGAR MUDAH DIKLIK) -->
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-[#0d1117] border-t border-blue-900/60 px-2 py-3 flex justify-around items-center z-50 shadow-2xl">
+        <button onclick="switchTab('beranda')" id="nav-beranda" class="flex flex-col items-center space-y-1 text-blue-500 w-1/5 py-1">
             <span class="text-lg">🏠</span>
-            <span class="text-[10px] font-bold tracking-wider">BERANDA</span>
+            <span class="text-[10px] font-bold">BERANDA</span>
         </button>
-        <button onclick="switchTab('stok')" id="nav-stok" class="flex flex-col items-center space-y-1 text-gray-400 w-1/5">
+        <button onclick="switchTab('stok')" id="nav-stok" class="flex flex-col items-center space-y-1 text-gray-400 w-1/5 py-1">
             <span class="text-lg">📦</span>
-            <span class="text-[10px] font-bold tracking-wider">STOK</span>
+            <span class="text-[10px] font-bold">STOK</span>
         </button>
-        <button onclick="switchTab('favorit')" id="nav-favorit" class="flex flex-col items-center space-y-1 text-gray-400 w-1/5">
+        <button onclick="switchTab('favorit')" id="nav-favorit" class="flex flex-col items-center space-y-1 text-gray-400 w-1/5 py-1">
             <span class="text-lg">🤍</span>
-            <span class="text-[10px] font-bold tracking-wider">FAVORIT</span>
+            <span class="text-[10px] font-bold">FAVORIT</span>
         </button>
-        <button onclick="switchTab('info')" id="nav-info" class="flex flex-col items-center space-y-1 text-gray-400 w-1/5">
+        <button onclick="switchTab('info')" id="nav-info" class="flex flex-col items-center space-y-1 text-gray-400 w-1/5 py-1">
             <span class="text-lg">🛡️</span>
-            <span class="text-[10px] font-bold tracking-wider">INFO</span>
+            <span class="text-[10px] font-bold">INFO</span>
         </button>
-        <button onclick="openCartModal()" class="flex flex-col items-center space-y-1 text-gray-400 w-1/5">
+        <button onclick="openCartModal()" class="flex flex-col items-center space-y-1 text-gray-400 w-1/5 py-1">
             <span class="text-lg">🛒</span>
-            <span class="text-[10px] font-bold tracking-wider">KERANJANG</span>
+            <span class="text-[10px] font-bold">KERANJANG</span>
         </button>
     </nav>
 
-    <!-- MODAL KERANJANG -->
-    <div id="cart-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-end justify-center hidden">
-        <div class="bg-[#111827] border-t border-blue-500/40 w-full max-w-md rounded-t-3xl p-5 space-y-4 max-h-[80vh] overflow-y-auto">
-            <div class="flex items-center justify-between border-b border-gray-800 pb-3">
-                <div>
-                    <h3 class="text-base font-extrabold text-white">KERANJANG</h3>
-                    <p id="cart-item-count" class="text-xs text-gray-400">0 akun</p>
-                </div>
-                <button onclick="closeCartModal()" class="p-2 bg-gray-900 border border-gray-800 rounded-full text-white text-xs">✕</button>
-            </div>
-            <div id="cart-items-container" class="space-y-3">
-                <!-- Cart items -->
-            </div>
-            <div id="cart-empty-state" class="text-center py-8 space-y-3">
-                <div class="text-3xl">🛒</div>
-                <div class="text-sm font-bold text-white">Keranjang kosong</div>
-                <p class="text-xs text-gray-400">Tambahkan akun dari halaman detail untuk ditanyakan sekaligus.</p>
-                <button onclick="closeCartModal(); switchTab('stok');" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-blue-600/30">LIHAT STOK</button>
-            </div>
-        </div>
-    </div>
-
     <!-- MODAL PANEL ADMIN -->
-    <div id="admin-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div id="admin-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-[#111827] border border-blue-500/40 w-full max-w-md rounded-2xl p-5 space-y-4">
             <div class="flex items-center justify-between border-b border-gray-800 pb-3">
-                <h3 class="text-sm font-extrabold text-white flex items-center space-x-2">
-                    <span>⚙️</span><span>PANEL ADMIN</span>
-                </h3>
-                <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white">✕</button>
+                <h3 class="text-sm font-extrabold text-white">PANEL ADMIN</h3>
+                <button onclick="closeAdminModal()" class="text-gray-400 text-sm px-2">✕ Tutup</button>
             </div>
             <div class="space-y-3 text-xs">
-                <p class="text-gray-300">Kelola tambah atau hapus inventaris akun langsung dari panel ini.</p>
-                <div class="space-y-2">
-                    <input type="text" id="admin-game" placeholder="Nama Game (cth: Mobile Legends)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-white">
-                    <input type="text" id="admin-kode" placeholder="Kode Akun (cth: JB-0007)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-white">
-                    <input type="number" id="admin-harga" placeholder="Harga (cth: 50000)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-white">
-                    <select id="admin-status" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-white">
-                        <option value="READY">READY</option>
-                        <option value="TERJUAL">TERJUAL</option>
-                    </select>
-                </div>
-                <button onclick="addNewProduct()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 transition">
-                    + TAMBAH STOK BARU
-                </button>
+                <input type="text" id="admin-game" placeholder="Nama Game (cth: Mobile Legends)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-white">
+                <input type="text" id="admin-kode" placeholder="Kode Akun (cth: JB-0007)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-white">
+                <input type="number" id="admin-harga" placeholder="Harga (cth: 50000)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-white">
+                <select id="admin-status" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-white">
+                    <option value="READY">READY</option>
+                    <option value="TERJUAL">TERJUAL</option>
+                </select>
+                <button onclick="addNewProduct()" class="w-full py-2.5 bg-blue-600 text-white font-bold rounded-xl shadow-lg">+ TAMBAH STOK BARU</button>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT APLIKASI -->
+    <!-- JAVASCRIPT -->
     <script>
-        // Data Produk Default
         let products = JSON.parse(localStorage.getItem('astra_products')) || [
-            { id: 1, game: 'JBKU', code: 'JB-0006', price: 3000, status: 'READY', desc: 'Bind Off - Full spek aman' },
-            { id: 2, game: 'JBKU', code: 'JB-0003', price: 5000, status: 'TERJUAL', desc: 'Bind Off - Terjual cepat' },
-            { id: 3, game: 'MOBILE LEGENDS', code: 'JB-0004', price: 40000, status: 'TERJUAL', desc: 'Bind Kosong - Siap ganti email' },
-            { id: 4, game: 'FREE FIRE', code: 'JB-0003', price: 30000, status: 'TERJUAL', desc: 'Full skin & item sultan' }
+            { id: 1, game: 'JBKU', code: 'JB-0006', price: 3000, status: 'READY' },
+            { id: 2, game: 'MOBILE LEGENDS', code: 'JB-0004', price: 40000, status: 'TERJUAL' }
         ];
+        let favorites = JSON.parse(localStorage.getItem('astra_favorites')) || [];
 
-        let favorites = JSON.parse(localSt
+        function switchTab(tabId) {
+            ['beranda', 'stok', 'favorit', 'info'].forEach(t => {
+                const el = document.getElementById(`tab-${t}`);
+                const nav = document.getElementById(`nav-${t}`);
+                if(el) el.classList.add('hidden');
+                if(nav) nav.className = "flex flex-col items-center space-y-1 text-gray-400 w-1/5 py-1";
+            });
+            const activeEl = document.getElementById(`tab-${tabId}`);
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if(activeEl) activeEl.classList.remove('hidden');
+            if(activeNav) activeNav.className = "flex flex-col items-center space-y-1 text-blue-500 w-1/5 py-1";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if(tabId === 'stok') renderStok();
+            if(tabId === 'favorit') renderFavorit();
+        }
+
+        function renderStok() {
+            const listEl = document.getElementById('product-list');
+            const searchVal = (document.getElementById('search-input')?.value || '').toLowerCase();
+            let filtered = products.filter(p => p.code.toLowerCase().includes(searchVal) || p.game.toLowerCase().includes(searchVal));
+            
+            document.getElementById('stok-count').innerText = `${filtered.length} akun`;
+            if(filtered.length === 0) {
+                listEl.innerHTML = `<div class="text-center py-8 text-gray-500 text-xs">Tidak ada stok.</div>`;
+                return;
+            }
+            listEl.innerHTML = filtered.map(p => `
+                <div class="glass-card rounded-2xl p-4 border border-blue-500/20 flex items-center justify-between">
+                    <div>
+                        <div class="text-[10px] text-blue-400 font-bold">${p.status}</div>
+                        <h4 class="text-sm font-bold text-white">${p.game} (${p.code})</h4>
+                        <div class="text-sm font-black text-blue-400">Rp ${p.price.toLocaleString('id-ID')}</div>
+                    </div>
+                    ${p.status === 'READY' ? `<a href="https://wa.me/6285656021660?text=Minat%20akun%20${p.code}" target="_blank" class="px-3 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl">BELI</a>` : `<span class="text-xs text-gray-500 font-bold">TERJUAL</span>`}
+                </div>
+            `).join('');
+        }
+
+        function renderFavorit() {
+            const listEl = document.getElementById('favorit-list');
+            const favProducts = products.filter(p => favorites.includes(p.id));
+            if(favProducts.length === 0) {
+                listEl.innerHTML = `<div class="text-center py-8 text-gray-500 text-xs">Belum ada favorit.</div>`;
+                return;
+            }
+            listEl.innerHTML = favProducts.map(p => `<div class="glass-card rounded-xl p-3 text-white text-xs">${p.game} - ${p.code}</div>`).join('');
+        }
+
+        function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
+        function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
+        function openCartModal() { alert('Keranjang kosong'); }
+        function toggleSound() { alert('Suara diaktifkan'); }
+
+        function addNewProduct() {
+            const game = document.getElementById('admin-game').value;
+            const code = document.getElementById('admin-kode').value;
+            const price = Number(document.getElementById('admin-harga').value);
+            const status = document.getElementById('admin-status').value;
+            if(!game || !code || !price) { alert('Isi semua kolom!'); return; }
+            products.unshift({ id: Date.now(), game, code, price, status });
+            localStorage.setItem('astra_products', JSON.stringify(products));
+            closeAdminModal();
+            renderStok();
+            alert('Berhasil ditambah!');
+        }
+    </script>
+</body>
+</html>
