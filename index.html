@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0879e8"><title>ASTRA Apps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ticker"><span id="tickerText">DISKON 88%　　APK DISKON 88%　　APK DISKON 88%　　</span></div>
+<header class="topbar">
+  <div class="brand"><div class="logo" id="logoMark">A</div><div><div class="brandname" id="brandName">ASTRA</div><small id="brandTag">APPS STORE</small></div></div>
+  <div class="head-actions"><button class="pixel-btn small" id="adminOpen" title="Panel admin">⚙</button><button class="pixel-btn small" id="favShortcut" title="Favorit">♥</button></div>
+</header>
+<main>
+<section class="hero panel">
+  <div class="hero-copy"><p class="eyebrow">SELAMAT DATANG DI</p><h1><span id="heroName">ASTRA</span><br><em>APPS</em></h1>
+  <p id="heroDesc">Temukan aplikasi favoritmu di satu tempat.</p><div class="verified">★ TOKO RESMI • UPDATE TERBARU ★</div></div>
+  <div class="hero-logo" id="heroLogo">A</div>
+</section>
+<div class="promo panel"><span>⚡ <b id="discountText">DISKON 88%</b></span><span class="promo-note">PROMO TOKO</span></div>
+<section class="stats">
+ <div class="stat"><b>💎</b><strong id="appCount">0</strong><small>APLIKASI</small></div>
+ <div class="stat"><b>🏆</b><strong>24/7</strong><small>INFO TOKO</small></div>
+ <div class="stat"><b>⭐</b><strong id="reviewCount">0</strong><small>TESTIMONI</small></div>
+</section>
+<div class="quick-actions">
+ <a class="action primary" href="#apps">🔎 LIHAT SEMUA APLIKASI</a><a class="action" id="waTop" href="#" target="_blank" rel="noreferrer">📦 HUBUNGI TOKO</a>
+</div>
+<section id="apps" class="section">
+ <div class="section-title"><h2>★ KATALOG APLIKASI</h2><span class="dash"></span></div>
+ <div class="filters"><input id="search" placeholder="⌕ Cari aplikasi, kode, keterangan..."><select id="category"><option value="Semua">Semua kategori</option><option>Common</option><option>Rare</option><option>Epic</option><option>Legend</option></select></div>
+ <div id="appGrid" class="app-grid"></div>
+</section>
+<section id="community" class="section">
+ <div class="section-title"><h2>★ KOMUNITAS</h2><span class="dash"></span></div>
+ <div class="community-grid">
+  <a class="community-card" id="waLink" href="#" target="_blank" rel="noreferrer"><b>📢 SALURAN TOKO</b><small>Update stok terbaru</small><span>›</span></a>
+  <a class="community-card" id="groupLink" href="#" target="_blank" rel="noreferrer"><b>👥 GRUP TOKO</b><small>Diskusi & promo</small><span>›</span></a>
+  <a class="community-card" id="tiktokLink" href="#" target="_blank" rel="noreferrer"><b>♪ TIKTOK</b><small id="tiktokLabel">@akun-toko</small><span>›</span></a>
+ </div>
+</section>
+<section id="info" class="section">
+ <div class="section-title"><h2>★ INFO TOKO</h2><span class="dash"></span></div>
+ <div class="price-grid" id="priceGrid"></div>
+ <div class="steps panel"><h3>CARA PEMESANAN</h3><p><b>1</b> Pilih aplikasi dan cek keterangannya.</p><p><b>2</b> Tekan tombol minta link untuk menghubungi admin.</p><p><b>3</b> Pastikan detail dan harga sebelum melakukan pembayaran.</p></div>
+</section>
+<section id="testimonials" class="section">
+ <div class="section-title"><h2>★ TESTIMONI</h2><span class="dash"></span></div><div class="testi-grid" id="testiGrid"></div>
+</section>
+<section id="favorites" class="section"><div class="section-title"><h2>♥ FAVORIT SAYA</h2><span class="dash"></span></div><div id="favGrid" class="app-grid"></div></section>
+</main>
+<nav class="bottom-nav"><a href="#">⌂<small>BERANDA</small></a><a href="#apps">▣<small>APLIKASI</small></a><a href="#community">♟<small>KOMUNITAS</small></a><a href="#info">ⓘ<small>INFO</small></a><a href="#favorites">♥<small>FAVORIT</small></a></nav>
+<footer id="footerText">Dibuat dengan ♥ • Loot Block</footer>
+
+<div class="modal" id="adminModal" aria-hidden="true"><div class="modal-card admin-card">
+ <div class="modal-head"><h2>⚙ PANEL ADMIN</h2><button class="close" id="adminClose">✕</button></div>
+ <div id="loginBox"><p>Masuk menggunakan akun admin Supabase.</p><label>Email admin<input id="adminEmail" type="email" autocomplete="username"></label><label>Password<input id="adminPassword" type="password" autocomplete="current-password"></label><button class="action primary full" id="loginBtn">MASUK ADMIN</button><p class="hint" id="loginHint">Buat akun admin terlebih dahulu di Supabase Authentication.</p></div>
+ <div id="editorBox" hidden>
+  <div class="admin-tabs"><button class="tab active" data-tab="general">Brand</button><button class="tab" data-tab="links">Tautan</button><button class="tab" data-tab="appsTab">Aplikasi</button><button class="tab" data-tab="pricesTab">Harga</button></div>
+  <div class="tabpage" id="general"><label>Nama brand<input id="fName"></label><label>Teks logo<input id="fLogo"></label><label>Slogan/deskripsi<input id="fDesc"></label><label>Teks promo<input id="fDiscount"></label><label>Warna utama<input id="fColor" type="color"></label><label>Footer<input id="fFooter"></label></div>
+  <div class="tabpage" id="links" hidden><label>WhatsApp (format internasional, contoh 62812xxxx)<input id="fWa"></label><label>Link saluran WhatsApp<input id="fChannel"></label><label>Link grup toko<input id="fGroup"></label><label>Link TikTok<input id="fTiktok"></label><label>Username TikTok<input id="fTiktokName"></label></div>
+  <div class="tabpage" id="appsTab" hidden><p class="hint">Satu aplikasi per baris: Nama | Kode | Kategori | Harga | Deskripsi | URL gambar (opsional)</p><textarea id="fApps" rows="9"></textarea></div>
+  <div class="tabpage" id="pricesTab" hidden><p class="hint">Satu paket per baris: Nama paket | Harga | Fitur dipisahkan koma</p><textarea id="fPrices" rows="7"></textarea></div>
+  <div class="admin-actions"><button class="action primary" id="saveBtn">SIMPAN PERUBAHAN</button><button class="action" id="logoutBtn">KELUAR</button></div><p class="hint" id="saveHint">Perubahan akan tampil untuk semua pengunjung setelah disimpan.</p>
+ </div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script><script src="app.js"></script>
+</body></html>
